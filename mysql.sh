@@ -3,5 +3,5 @@ dnf module disable mysql -y
 
 yum install mysql-community-server -y
 
-sytstemctl enable mysqld
+systemctl enable mysqld
 systemctl start mysqld
