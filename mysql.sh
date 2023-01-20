@@ -1,3 +1,8 @@
+if [ -z "$1" ]; then
+  echo Missing argument, please input ROBOSHOP_MYSQL_PASSWORD
+  exit
+fi
+
 ROBOSHOP_MYSQL_PASSWORD=$1
 
 echo -e "\e[33mDownloading MySQL Repository\e[0m"
