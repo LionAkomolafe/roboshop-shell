@@ -14,23 +14,27 @@ STAT() {
   fi
 }
 
-echo -e "\e[33mDownloading MySQL Repository\e[0m"
+PRINT() {
+  echo -e "\e[33m$1\e[0m"
+}
+
+PRINT "Downloading MySQL Repository"
 curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
 STAT $?
 
-echo Disable MySQL 8 Version Repo
+PRINT "Disable MySQL 8 Version Repo"
 dnf module disable mysql -y
 STAT $?
 
-echo Install MySQL Community Server
+PRINT "Install MySQL Community Server"
 yum install mysql-community-server -y
 STAT $?
 
-echo Enable MySQL Service
+PRINT "Enable MySQL Service"
 systemctl enable mysqld
 STAT $?
 
-echo Start MySQL Service
+PRINT "Start MySQL Service"
 systemctl start mysqld
 STAT $?
 
