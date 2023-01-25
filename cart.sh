@@ -24,7 +24,8 @@ STAT $?
 
 PRINT "Extracting App Content"
 unzip -o /tmp/cart.zip &>>$LOG
-mv cart-main cart &>>$LOG
+
+mv cart-main cart
 cd cart
 
 PRINT "Install NodeJS Dependencies"
@@ -35,9 +36,9 @@ PRINT "Reconfigure Endpoints for SystemD Configuration"
 sed -i -e 's/REDIS_ENDPOINT/redis.devopsb69.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.devopsb69.online/' /home/roboshop/cart/systemd.service &>>LOG
 STAT $?
 
-PRINT "Rename Configuration"
-mv /home/roboshop/cart/systemd.service /etc/systemd/system/cart.service &>>$LOG
-STAT $?
+#PRINT "Rename Configuration"
+#mv /home/roboshop/cart/systemd.service /etc/systemd/system/cart.service &>>$LOG
+#STAT $?
 
 PRINT "Reload SystemD"
 systemctl daemon-reload &>>$LOG
