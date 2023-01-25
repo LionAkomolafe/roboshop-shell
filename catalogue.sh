@@ -1,20 +1,54 @@
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash
-yum install nodejs -y
+COMPONENT=catalogue
+source common.sh
 
-useradd roboshop
+PRINT "Download NodeJS Repository"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
+STAT $?
 
-curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip"
+PRINT "Install NodeJS Repo"
+yum install nodejs -y &>>$LOG
+STAT $?
+
+PRINT "Add Application User"
+useradd roboshop &>>$LOG
+STAT $?
+
+PRINT "Download App Content"
+curl -s -L -o /tmp/catalogue.zip "https://github.com/roboshop-devops-project/catalogue/archive/main.zip" &>>$LOG
+STAT $?
+
+PRINT "Delete former version of App"
 cd /home/roboshop
-rm -rf catalogue
-unzip -o /tmp/catalogue.zip
+rm -rf catalogue &>>$LOG
+STAT $?
+
+PRINT "Extract App Content"
+unzip -o /tmp/catalogue.zip &>>$LOG
+STAT $?
+
 mv catalogue-main catalogue
-cd /home/roboshop/catalogue
-npm install
+cd catalogue
 
-sed -i -e 's/MONGO_DNSNAME/mongodb.devopsb69.online/' systemd.service
+PRINT "Install NodeJS Dependencies"
+npm install &>>$LOG
+STAT $?
 
-mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
-systemctl daemon-reload
-systemctl restart catalogue
-systemctl enable catalogue
+PRINT "Reconfigure Endpoints for SystemD Configuration"
+sed -i -e 's/MONGO_DNSNAME/mongodb.devopsb69.online/' systemd.service &>>$LOG
+STAT $?
 
+PRINT "Rename Configuration"
+mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service &>>$LOG
+STAT $?
+
+PRINT "Reload SystemD"
+systemctl daemon-reload &>>$LOG
+STAT $?
+
+PRINT "Restart Service"
+systemctl restart catalogue &>>$LOG
+STAT $?
+
+PRINT "Enable Service"
+systemctl enable catalogue &>>$LOG
+STAT $?
