@@ -11,5 +11,6 @@ STAT() {
   fi
 }
 
+
 LOG=/tmp/$COMPONENT.log
 rm -f $LOG
