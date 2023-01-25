@@ -9,8 +9,8 @@ PRINT "Install NodeJS"
 yum install nodejs -y &>>$LOG
 STAT $?
 
-PRINT "Create User Application" &>>$LOG
-useradd roboshop
+PRINT "Create User Application"
+useradd roboshop &>>$LOG
 STAT $?
 
 PRINT "Download App Content"
