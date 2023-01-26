@@ -18,7 +18,7 @@ rm -f $LOG
 
 DOWNLOAD_APP_CODE() {
   PRINT "Download App Content"
-    curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>$LOG
+    curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/roboshop-devops-project/$COMPONENT/archive/main.zip" &>>$LOG
     STAT $?
 
     PRINT "Remove Previous Version of App"
@@ -42,7 +42,7 @@ NODEJS() {
   yum install nodejs -y &>>$LOG
   STAT $?
 
-  PRINT "Create User Application"
+  PRINT "Adding Application User"
   id roboshop &>>$LOG
   if [ $? -ne 0 ]; then
     useradd roboshop &>>$LOG
