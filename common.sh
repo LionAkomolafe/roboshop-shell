@@ -54,22 +54,6 @@ NODEJS() {
   mv ${COMPONENT}-main ${COMPONENT}
   cd ${COMPONENT}
 
-  PRINT "Download App Content"
-  curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>$LOG
-  STAT $?
-
-  PRINT "Remove Previous Version of App"
-  cd /home/roboshop &>>$LOG
-  rm -rf ${COMPONENT} &>>$LOG
-  STAT $?
-
-  PRINT "Extracting App Content"
-  unzip -o /tmp/${COMPONENT}.zip &>>$LOG
-  STAT $?
-
-  mv ${COMPONENT}-main ${COMPONENT}
-  cd ${COMPONENT}
-
   PRINT "Install NodeJS Dependencies"
   npm install &>>LOG
   STAT $?
