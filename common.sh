@@ -16,10 +16,27 @@ STAT() {
 LOG=/tmp/$COMPONENT.log
 rm -f $LOG
 
-NODEJS() {
-  COMPONENT=cart
-  source common.sh
+DOWNLOAD_APP_CODE() {
+  PRINT "Download App Content"
+    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>$LOG
+    STAT $?
 
+    PRINT "Remove Previous Version of App"
+    cd $APP_LOC &>>$LOG
+    rm -rf ${CONTENT} &>>$LOG
+    STAT $?
+
+    PRINT "Extracting App Content"
+    unzip -o /tmp/${COMPONENT}.zip &>>$LOG
+    STAT $?
+
+    mv ${COMPONENT}-main ${COMPONENT}
+    cd ${COMPONENT}
+}
+
+NODEJS() {
+  APP_LOC=/home/roboshop
+  CONTENT=$COMPONENT
   PRINT "Install NodeJS Repository"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$LOG
   STAT $?
