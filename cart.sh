@@ -1,4 +1,4 @@
 COMPONENT=cart
-sourcs common.sh
+source common.sh
 
 NODEJS
