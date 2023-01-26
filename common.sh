@@ -51,6 +51,9 @@ NODEJS() {
 
   DOWNLOAD_APP_CODE
 
+  mv ${COMPONENT}-main ${COMPONENT}
+  cd ${COMPONENT}
+
   PRINT "Download App Content"
   curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>$LOG
   STAT $?
