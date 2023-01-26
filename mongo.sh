@@ -1,4 +1,4 @@
-COMPONENT=mongo
+COMPONENT=mongodb
 source common.sh
 
 PRINT "Downloading Mongo Repository"
