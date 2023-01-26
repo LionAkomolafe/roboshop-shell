@@ -22,7 +22,7 @@ systemctl start mongod &>>$LOG
 STAT $?
 
 APP_LOC=/tmp
-$CONTENT=mongodb-main
+CONTENT=mongodb-main
 DOWNLOAD_APP_CODE
 
 cd mongodb-main &>>$LOG
