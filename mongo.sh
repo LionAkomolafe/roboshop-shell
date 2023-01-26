@@ -1,15 +1,32 @@
-curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo
+COMPONENT=mongo
+source common.sh
 
-yum install mongodb-org -y
-sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+PRINT "Downloading Mongo Repository"
+curl -s -o /etc/yum.repos.d/mongodb.repo https://raw.githubusercontent.com/roboshop-devops-project/mongodb/main/mongo.repo &>>$LOG
+STAT $?
 
-systemctl enable mongod
-systemctl start mongod
+PRINT "Install Code Repo"
+yum install mongodb-org -y &>>$LOG
+STAT $?
 
-curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
-cd /tmp
-unzip -o mongodb.zip
-cd mongodb-main
-mongo < catalogue.js
-mongo < users.js
+PRINT "Reconfigure Mongo Enpoints"
+sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf &>>$LOG
+STAT $?
 
+PRINT "Enable Mongod Service"
+systemctl enable mongod &>>$LOG
+STAT $?
+
+PRINT "Start Mongod Service"
+systemctl start mongod &>>$LOG
+STAT $?
+
+DOWNLOAD_APP_CODE
+
+PRINT "Load Catalogue Schema"
+mongo < catalogue.js &>>$LOG
+STAT $?
+
+PRINT "Load User Schema"
+mongo < users.js &>>$LOG
+STAT $?
