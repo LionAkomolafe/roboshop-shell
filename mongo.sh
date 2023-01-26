@@ -27,8 +27,6 @@ DOWNLOAD_APP_CODE
 
 cd mongodb-main &>>$LOG
 
-DOWNLOAD_APP_CODE
-
 PRINT "Load Catalogue Schema"
 mongo < catalogue.js &>>$LOG
 STAT $?
