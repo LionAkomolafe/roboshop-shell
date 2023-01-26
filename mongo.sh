@@ -21,6 +21,20 @@ PRINT "Start Mongod Service"
 systemctl start mongod &>>$LOG
 STAT $?
 
+exit
+
+PRINT ""
+curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>$LOG
+STAT $?
+
+cd /tmp
+
+PRINT ""
+unzip mongodb.zip
+STAT $?
+
+cd mongodb-main &>>$LOG
+
 DOWNLOAD_APP_CODE
 
 PRINT "Load Catalogue Schema"
