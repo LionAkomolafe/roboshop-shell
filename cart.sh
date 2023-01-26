@@ -27,6 +27,7 @@ STAT $?
 
 PRINT "Extracting App Content"
 unzip -o /tmp/cart.zip &>>$LOG
+STAT $?
 
 mv cart-main cart
 cd cart
