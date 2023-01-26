@@ -18,16 +18,16 @@ rm -f $LOG
 
 DOWNLOAD_APP_CODE() {
   PRINT "Download App Content"
-    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>$LOG
+    curl -s -L -o /tmp/$COMPONENT.zip "https://github.com/roboshop-devops-project/cart/archive/main.zip" &>>$LOG
     STAT $?
 
     PRINT "Remove Previous Version of App"
     cd $APP_LOC &>>$LOG
-    rm -rf ${CONTENT} &>>$LOG
+    rm -rf $CONTENT &>>$LOG
     STAT $?
 
     PRINT "Extracting App Content"
-    unzip -o /tmp/${COMPONENT}.zip &>>$LOG
+    unzip -o /tmp/$COMPONENT.zip &>>$LOG
     STAT $?
 }
 
