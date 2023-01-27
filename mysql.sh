@@ -27,7 +27,7 @@ PRINT "Start MySQL Service"
 systemctl start mysqld &>>$LOG
 STAT $?
 
-echo "Uninstall Plugin validate_password"
+PRINT "Uninstall Plugin validate_password"
 echo show databases | mysql -uroot -p${ROBOSHOP_MYSQL_PASSWORD} &>>$LOG
 if [ $? -ne 0 ]
 then
