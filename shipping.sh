@@ -5,10 +5,12 @@ PRINT "Install JavaScript"
 yum install maven -y
 STAT $?
 
-PRINT "Create Application User"
-useradd roboshop
-STAT $?
-
+id roboshop
+if [ $? -ne 0 ]; then
+  PRINT "Create Application User"
+  useradd roboshop
+  STAT $?
+fi
 
 cd /home/roboshop
 PRINT "Download App Content"
