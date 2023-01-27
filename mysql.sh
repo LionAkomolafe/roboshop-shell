@@ -51,7 +51,3 @@ cd mysql-main &>>$LOG
 PRINT "Load Shipping Schema"
 mysql -u root -p${ROBOSHOP_MYSQL_PASSWORD} <shipping.sql &>>$LOG
 STAT $?
-
-PRINT "Load User Schema"
-mongo < users.js &>>$LOG
-STAT $?
