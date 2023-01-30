@@ -42,7 +42,7 @@ DOWNLOAD_APP_CODE() {
 
 SYSTEMD_SETUP() {
   PRINT "Reconfigure the Endpoints for SystemD Configuration"
-    sed -i -e 's/REDIS_ENDPOINT/redis.devopsb69.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.devopsb69.online/' /home/roboshop/${COMPONENT}/systemd.service &>>LOG
+    sed -i -e 's/REDIS_ENDPOINT/redis.kingyamza.online/' -e 's/CATALOGUE_ENDPOINT/catalogue.kingyamza.online/' /home/roboshop/${COMPONENT}/systemd.service &>>LOG
     mv /home/roboshop/${COMPONENT}/systemd.service /etc/systemd/system/${COMPONENT}.service
     STAT $?
 
